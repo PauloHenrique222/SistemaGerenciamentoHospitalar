@@ -17,25 +17,30 @@ public class UnidadeSaude implements Serializable {
     @Column(unique = true, nullable = false)
     private String numeroRegistro;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "unidadeSaude")
     private List<Medicamento> medicamentos;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "unidadeSaude")
     private List<Exame> exames;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "unidadeSaude")
     private List<Telefone> telefones;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "unidadeSaude")
     private List<FichaAtendimento> fichaAtendimentos;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "unidadeSaude")
     private List<Funcionario> funcionarios;
 
+    @JsonIgnore
     @OneToOne(cascade=CascadeType.ALL)
     private Endereco endereco;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="tipo_id")
     private Tipo tipo;

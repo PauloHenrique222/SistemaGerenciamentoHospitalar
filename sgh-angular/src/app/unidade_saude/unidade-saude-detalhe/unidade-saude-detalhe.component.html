@@ -1,0 +1,106 @@
+<div class="card">
+  <div class="card-header text-center">
+    Manutenção de Unidades de Saúde:
+  </div>
+  <div class="card-body">
+    <div class="card-container">
+      <div>
+        <form [formGroup]="formUnidade" (ngSubmit)="onSubmit"  class="form-exemplo">
+          <div style="display: none">
+            <mat-form-field class="example-full-width">
+              <mat-label>ID</mat-label>
+              <input matInput  formControlName="id">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Nome</mat-label>
+            <input type="text" matInput placeholder="Ex. UPA Campinas" formControlName="nome"
+                   [errorStateMatcher]="matcher"
+                   required>
+
+            <mat-error *ngIf="getControl.nome.hasError('nome') && !getControl.nome.hasError('required')">
+              por favor entre com nome válido!
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>NÚMERO DE REGISTRO</mat-label>
+            <input type="text" matInput placeholder="Ex: 999.999.999-9999"  [errorStateMatcher]="matcher"
+                   mask="000.000.000-0000" required  formControlName="numeroRegistro">
+            <mat-error *ngIf="getControl.numeroRegistro.hasError('numeroRegistro') && !getControl.numeroRegistro.hasError('required')">
+              por favor entre com um número de registro válido!
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Tipo</mat-label>
+            <select matNativeControl required>
+              <option value="1">UPA</option>
+              <option value="2">CAIS</option>
+            </select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Rua</mat-label>
+            <input matInput placeholder="Ex. Rua 01">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>CEP</mat-label>
+            <input matInput placeholder="Ex. 393455-454">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Complemento</mat-label>
+            <input matInput placeholder="Ex. Casa 1-A">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Setor</mat-label>
+            <textarea matInput placeholder="Ex. Campinas"></textarea>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Número</mat-label>
+            <input matInput placeholder="Ex. 1">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>País</mat-label>
+            <select matNativeControl required>
+              <option value="1">Brasil</option>
+              <option value="2">Argentina</option>
+            </select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Estado</mat-label>
+            <select matNativeControl required>
+              <option value="1">Goiás</option>
+              <option value="2">São Paulo</option>
+            </select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Cidade</mat-label>
+            <select matNativeControl required>
+              <option value="1">Goiânia</option>
+              <option value="2">Trindade</option>
+            </select>
+          </mat-form-field>
+
+          <hr>
+
+          <button style="margin-right: 5px" mat-raised-button type="submit" (click)="onSubmit()" color="primary"> Salvar </button>
+          <button mat-raised-button type="button" (click)="voltar()" color="default"> Voltar </button>
+
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+

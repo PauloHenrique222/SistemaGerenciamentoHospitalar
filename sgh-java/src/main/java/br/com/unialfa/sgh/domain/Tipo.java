@@ -1,5 +1,7 @@
 package br.com.unialfa.sgh.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +14,7 @@ public class Tipo implements Serializable {
     private long id;
     private String nome;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tipo")
     private List<UnidadeSaude> unidadeSaudes;
 
