@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {TipoService} from '../tipo.service';
-import {TipoDto} from '../../../model/tipo-dto';
+import {Tipo} from '../../../model/tipo';
 
 @Component({
   selector: 'app-tipo-listar',
@@ -19,7 +19,7 @@ export class TipoListarComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'nome', 'acoes'];
 
-  tipos: TipoDto[];
+  tipos: Tipo[];
 
   dataSource;
 
@@ -30,12 +30,24 @@ export class TipoListarComponent implements OnInit {
     });
   }
 
-  editar(tipo: TipoDto): void {
+  editar(tipo: Tipo): void {
     this.router.navigate(['/tipo-detalhe', tipo.id]);
   }
 
   cadastrar(): void {
-    this.router.navigate(['/tipo-detalhe']);
+    this.router.navigate(['/tipo-detalhe'])
+      .then(() => {
+        window.location.reload();
+      });
+  }
+
+  deletarTipo(tipo: Tipo): void {
+    this.tipoService.deletarTipo(tipo.id).subscribe(dados => {
+      this.router.navigate(['/listar-tipos'])
+        .then(() => {
+          window.location.reload();
+        });
+    });
   }
 
 }

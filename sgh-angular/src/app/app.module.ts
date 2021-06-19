@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home/home.component';
 import {TipoModule} from './tipo/tipo.module';
 import { UnidadeSaudeListarComponent } from './unidade_saude/unidade-saude-listar/unidade-saude-listar.component';
 import {UnidadeSaudeModule} from './unidade_saude/unidade-saude.module';
+import {CadastroModule} from './cadastro/cadastro.module';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -33,7 +34,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     AppRoutingModule,
     LoginModule,
     TipoModule,
-    UnidadeSaudeModule
+    UnidadeSaudeModule,
+    CadastroModule
   ],
   providers: [],
   bootstrap: [AppComponent]

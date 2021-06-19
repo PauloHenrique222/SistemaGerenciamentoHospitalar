@@ -13,6 +13,7 @@ public class Tipo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nome;
+    private long usuarioId;
 
     @JsonIgnore
     @OneToMany(mappedBy = "tipo")
@@ -43,6 +44,14 @@ public class Tipo implements Serializable {
 
     public void setUnidadeSaudes(List<UnidadeSaude> unidadeSaudes) {
         this.unidadeSaudes = unidadeSaudes;
+    }
+
+    public long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }
 

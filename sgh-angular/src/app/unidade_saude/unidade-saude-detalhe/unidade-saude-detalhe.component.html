@@ -14,7 +14,7 @@
           </div>
 
           <mat-form-field class="example-full-width">
-            <mat-label>Nome</mat-label>
+            <mat-label>NOME</mat-label>
             <input type="text" matInput placeholder="Ex. UPA Campinas" formControlName="nome"
                    [errorStateMatcher]="matcher"
                    required>
@@ -34,60 +34,78 @@
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
-            <mat-label>Tipo</mat-label>
-            <select matNativeControl required>
-              <option value="1">UPA</option>
-              <option value="2">CAIS</option>
-            </select>
+            <mat-label>RUA</mat-label>
+            <input type="text" matInput placeholder="Ex. Rua SB" formControlName="rua"
+                   [errorStateMatcher]="matcher"
+                   required>
+
+            <mat-error *ngIf="getControl.rua.hasError('rua') && !getControl.rua.hasError('required')">
+              por favor entre com um nome de rua válido!
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
-            <mat-label>Rua</mat-label>
-            <input matInput placeholder="Ex. Rua 01">
+            <mat-label>SETOR</mat-label>
+            <input type="text" matInput placeholder="Ex. Campinas" formControlName="setor"
+                   [errorStateMatcher]="matcher"
+                   required>
+
+            <mat-error *ngIf="getControl.setor.hasError('setor') && !getControl.setor.hasError('required')">
+              por favor entre com um nome de setor válido!
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>CEP</mat-label>
-            <input matInput placeholder="Ex. 393455-454">
+            <input type="text" matInput placeholder="Ex: 999.999-99"  [errorStateMatcher]="matcher"
+                   mask="000.000-00" required  formControlName="cep">
+            <mat-error *ngIf="getControl.cep.hasError('cep') && !getControl.cep.hasError('required')">
+              por favor entre com um CEP válido!
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
-            <mat-label>Complemento</mat-label>
-            <input matInput placeholder="Ex. Casa 1-A">
+            <mat-label>COMPLEMENTO</mat-label>
+            <input type="text" matInput placeholder="Ex. Próxmo ao Supermecado LD" formControlName="complemento"
+                   [errorStateMatcher]="matcher"
+                   required>
+
+            <mat-error *ngIf="getControl.complemento.hasError('complemento') && !getControl.complemento.hasError('required')">
+              por favor entre com um complemento válido!
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
-            <mat-label>Setor</mat-label>
-            <textarea matInput placeholder="Ex. Campinas"></textarea>
+            <mat-label>PAIS</mat-label>
+            <input type="text" matInput placeholder="Ex. Brasil" formControlName="pais"
+                   [errorStateMatcher]="matcher"
+                   required>
+
+            <mat-error *ngIf="getControl.pais.hasError('pais') && !getControl.pais.hasError('required')">
+              por favor entre com um nome de Pais válido!
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
-            <mat-label>Número</mat-label>
-            <input matInput placeholder="Ex. 1">
+            <mat-label>ESTADO</mat-label>
+            <input type="text" matInput placeholder="Ex. Goías" formControlName="estado"
+                   [errorStateMatcher]="matcher"
+                   required>
+
+            <mat-error *ngIf="getControl.estado.hasError('estado') && !getControl.estado.hasError('required')">
+              por favor entre com um nome de Estado válido!
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
-            <mat-label>País</mat-label>
-            <select matNativeControl required>
-              <option value="1">Brasil</option>
-              <option value="2">Argentina</option>
-            </select>
-          </mat-form-field>
+            <mat-label>CIDADE</mat-label>
+            <input type="text" matInput placeholder="Ex. Goiânia" formControlName="cidade"
+                   [errorStateMatcher]="matcher"
+                   required>
 
-          <mat-form-field class="example-full-width">
-            <mat-label>Estado</mat-label>
-            <select matNativeControl required>
-              <option value="1">Goiás</option>
-              <option value="2">São Paulo</option>
-            </select>
-          </mat-form-field>
-
-          <mat-form-field class="example-full-width">
-            <mat-label>Cidade</mat-label>
-            <select matNativeControl required>
-              <option value="1">Goiânia</option>
-              <option value="2">Trindade</option>
-            </select>
+            <mat-error *ngIf="getControl.cidade.hasError('cidade') && !getControl.cidade.hasError('required')">
+              por favor entre com um nome de Cidade válido!
+            </mat-error>
           </mat-form-field>
 
           <hr>

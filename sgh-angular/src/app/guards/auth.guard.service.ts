@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, EMPTY, Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {UserDto} from '../../model/user-dto';
+import {UsuarioDao} from '../../model/usuario-dao';
+import {catchError, map} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
+import {Usuario} from '../../model/usuario';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +21,51 @@ export class AuthGuardService {
 
   constructor(
     private router: Router,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private snackbar: MatSnackBar
   ) { }
 
-  login (user: UserDto) {
-    if (user.userName !== '' && user.password !== ''){
-      this.loggedIn.next(true);
-      this.router.navigate(['/']);
+  login (usuarioDao: UsuarioDao) {
+    if (usuarioDao.email !== '' && usuarioDao.password !== ''){
+      this.authenticate(usuarioDao).subscribe((dado) => {
+        localStorage.setItem('email', usuarioDao.email);
+        localStorage.setItem('usuario_id', dado.id);
+        localStorage.setItem('nome', dado.nome);
+        this.showMessage('Logado com sucesso', false);
+        this.loggedIn.next(true);
+        this.router.navigate(['/']);
+      });
     }
   }
 
   logout (){
     this.loggedIn.next(false);
-    this.router.navigate(['/login']);
+    localStorage.clear();
+    this.router.navigate(['/login'])
+      .then(() => {
+        window.location.reload();
+      });
+  }
+
+  authenticate(usuario: UsuarioDao): Observable<any>{
+    const url = `${environment.config.URL_API}/users/login`;
+    return this.httpClient.post<Usuario>(url, usuario).pipe(
+      map(obj => obj),
+      catchError( (e) => this.errorHandler(e))
+    );
+  }
+
+  errorHandler(e: any): Observable<any>{
+    this.showMessage('Ocorreu um erro!', true );
+    return EMPTY;
+  }
+
+  showMessage(msg: string, isError: boolean = false): void{
+    this.snackbar.open(msg, 'X', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      panelClass: isError ? ['msg-error'] : ['msg-success'],
+    });
   }
 }

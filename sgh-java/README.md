@@ -33,6 +33,6 @@ Requisitos:
 9 - O sistema deve possuir regras de acesso para cada perfil do usuário.
       9.1 - Os tipos de acesso são os seguintes:
 •	admin - Pode ter acesso a todas as funcionalidades do sistema.
-•	user - Não pode realizar cadastro ou excluir usuários do sistema.
+•	usuario - Não pode realizar cadastro ou excluir usuários do sistema.
 •	user_recepcao - Tem acesso ao cadastro de pacientes e das fichas de atendimento.
  

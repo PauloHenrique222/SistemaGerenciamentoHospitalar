@@ -5,7 +5,7 @@ import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdap
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {TipoService} from '../tipo.service';
-import {TipoDto} from '../../../model/tipo-dto';
+import {Tipo} from '../../../model/tipo';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -44,7 +44,7 @@ export class TipoDetalheComponent implements OnInit, ErrorStateMatcher{
   ) {
   }
 
-  tipo: TipoDto;
+  tipo: Tipo;
 
   formTipo: FormGroup;
 
@@ -59,19 +59,21 @@ export class TipoDetalheComponent implements OnInit, ErrorStateMatcher{
         if (id) {
           this.tipoService.bucarTipoPorId(id).subscribe(dados => {
             this.tipo = dados;
-            this.formTipo = this.fb.group({     // {5}
+            this.formTipo = this.fb.group({
               id: [this.tipo.id],
+              usuarioId: [this.tipo.usuarioId],
               nome: [this.tipo.nome, [Validators.required, Validators.minLength(3)]],
             });
-            console.log(this.formTipo);
           }, error => {console.error(error); });
         } else {
           this.tipo = {
             id: null,
+            usuarioId: +localStorage.getItem('usuario_id'),
             nome: '',
           };
-          this.formTipo = this.fb.group({     // {5}
+          this.formTipo = this.fb.group({
             id: [this.tipo.id],
+            usuarioId: [this.tipo.usuarioId],
             nome: [this.tipo.nome, Validators.required],
           });
         }
@@ -84,12 +86,12 @@ export class TipoDetalheComponent implements OnInit, ErrorStateMatcher{
       this.tipoService.salvarTipo(this.tipo).subscribe(() => {
         this.tipoService.showMessage('Tipo salvo com sucesso', false);
       });
-      this.router.navigate(['/tipos']);
+      this.router.navigate(['/listar-tipos']);
     }else{
       this.tipoService.editarTipo(this.tipo).subscribe(() => {
         this.tipoService.showMessage('Atualizado com sucesso', false);
       });
-      this.router.navigate(['/tipos']);
+      this.router.navigate(['/listar-tipos']);
     }
   }
 

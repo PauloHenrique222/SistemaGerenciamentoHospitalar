@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {UnidadeSaudeService} from '../unidade-saude.service';
-import {UnidadeSaudeDto} from '../../../model/unidade-saude-dto';
+import {UnidadeSaude} from '../../../model/unidade-saude';
 
 @Component({
   selector: 'app-unidade-saude-listar',
@@ -19,7 +19,7 @@ export class UnidadeSaudeListarComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'nome', 'numeroRegistro', 'tipo', 'acoes'];
 
-  unidades: UnidadeSaudeDto[];
+  unidades: UnidadeSaude[];
 
   dataSource;
 
@@ -30,7 +30,7 @@ export class UnidadeSaudeListarComponent implements OnInit {
     });
   }
 
-  editar(unidade: UnidadeSaudeDto): void {
+  editar(unidade: UnidadeSaude): void {
     this.router.navigate(['/unidade-detalhe']);
   }
 

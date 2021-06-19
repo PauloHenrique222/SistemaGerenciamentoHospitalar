@@ -6,6 +6,14 @@
     <div class="card-container">
       <div>
         <form [formGroup]="formTipo" (ngSubmit)="onSubmit"  class="form-exemplo">
+
+          <div style="display: none">
+            <mat-form-field class="example-full-width">
+              <mat-label>USUARIO ID</mat-label>
+              <input matInput  formControlName="usuarioId">
+            </mat-form-field>
+          </div>
+
           <div style="display: none">
             <mat-form-field class="example-full-width">
               <mat-label>ID</mat-label>
@@ -14,7 +22,7 @@
           </div>
 
           <mat-form-field class="example-full-width">
-            <mat-label>Nome</mat-label>
+            <mat-label>NOME</mat-label>
             <input type="text" matInput placeholder="Ex. João" formControlName="nome"
                    [errorStateMatcher]="matcher"
                    required>

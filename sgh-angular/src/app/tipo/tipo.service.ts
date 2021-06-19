@@ -4,7 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {EMPTY, Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
-import {TipoDto} from '../../model/tipo-dto';
+import {Tipo} from '../../model/tipo';
 
 @Injectable({
   providedIn: 'root'
@@ -16,24 +16,25 @@ export class TipoService {
     private snackbar: MatSnackBar
   ) { }
 
-  listarTipo(): Observable<TipoDto[]> {
-    const url = `${environment.config.URL_API}/tipos` ;
-    return this.httpCliente.get<TipoDto[]>(url).pipe(
+  listarTipo(): Observable<Tipo[]> {
+    const url = `${environment.config.URL_API}/tipos/listar/` ;
+    const id = +localStorage.getItem('usuario_id');
+    return this.httpCliente.get<Tipo[]>(url + id).pipe(
       map((tipos) => tipos)
     );
   }
 
-  salvarTipo(tipo: TipoDto): Observable<TipoDto>{
+  salvarTipo(tipo: Tipo): Observable<Tipo>{
     const url = `${environment.config.URL_API}/tipos/create` ;
-    return this.httpCliente.post<TipoDto>(url, tipo).pipe(
+    return this.httpCliente.post<Tipo>(url, tipo).pipe(
       map(obj => obj),
       catchError( (e) => this.errorHandler(e))
     );
   }
 
-  editarTipo(tipo: TipoDto): Observable<TipoDto>{
+  editarTipo(tipo: Tipo): Observable<Tipo>{
     const url = `${environment.config.URL_API}/tipos/edit` ;
-    return this.httpCliente.put<TipoDto>(url, tipo).pipe(
+    return this.httpCliente.put<Tipo>(url, tipo).pipe(
       map(obj => obj),
       catchError( (e) => this.errorHandler(e))
     );
@@ -53,10 +54,18 @@ export class TipoService {
     });
   }
 
-  bucarTipoPorId(id: number): Observable<TipoDto> {
+  bucarTipoPorId(id: number): Observable<Tipo> {
     const url = `${environment.config.URL_API}/tipos/` ;
-    return this.httpCliente.get<TipoDto>(url + id).pipe(
+    return this.httpCliente.get<Tipo>(url + id).pipe(
       map((tipo) => tipo),
+      catchError( (e) => this.errorHandler(e))
+    );
+  }
+
+  deletarTipo(id: number): Observable<any> {
+    const url = `${environment.config.URL_API}/tipos/delete/`;
+    return this.httpCliente.delete<Tipo>(url + id).pipe(
+      map((obj) => obj),
       catchError( (e) => this.errorHandler(e))
     );
   }

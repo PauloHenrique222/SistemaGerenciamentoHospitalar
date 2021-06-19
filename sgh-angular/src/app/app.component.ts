@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthGuardService} from './guards/auth.guard.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,17 +7,26 @@ import {Observable} from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'SGH';
 
-  isLoggedIn$: Observable<boolean>;                  // {1}
+  nome: string;
 
   constructor(private authService: AuthGuardService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
   }
 
   onLogout(): void {
-    this.authService.logout();                      // {3}
+    this.authService.logout();
+  }
+
+  getNome(): string {
+    return localStorage.getItem('nome');
+  }
+
+  isLoggedIn(): boolean {
+     if (localStorage.getItem('email') === null){
+       return false;
+     }
+     return true;
   }
 }

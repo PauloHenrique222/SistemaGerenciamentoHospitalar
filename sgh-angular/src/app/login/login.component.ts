@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthGuardService} from '../guards/auth.guard.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,         // {3}
-    private authService: AuthGuardService // {4}
+    private authService: AuthGuardService, // {4}
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.formLogin = this.fb.group({     // {5}
-      userName: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -35,5 +37,9 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.formLogin.value); // {7}
     }
     this.formSubmitAttempt = true;             // {8}
+  }
+
+  cadastrar(): void {
+    this.router.navigate(['/cadastro']);
   }
 }

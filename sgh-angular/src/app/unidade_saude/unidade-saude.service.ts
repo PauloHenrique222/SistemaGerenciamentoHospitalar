@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {EMPTY, Observable} from 'rxjs';
-import {TipoDto} from '../../model/tipo-dto';
 import {environment} from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
-import {UnidadeSaudeDto} from '../../model/unidade-saude-dto';
-import {UnidadeSaudeDao} from '../../model/unidade-saude-dao';
+import {UnidadeSaude} from '../../model/unidade-saude';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +15,9 @@ export class UnidadeSaudeService {
     private snackbar: MatSnackBar
   ) { }
 
-  listarUnidade(): Observable<UnidadeSaudeDto[]> {
+  listarUnidade(): Observable<UnidadeSaude[]> {
     const url = `${environment.config.URL_API}/unidades` ;
-    return this.httpCliente.get<UnidadeSaudeDto[]>(url).pipe(
+    return this.httpCliente.get<UnidadeSaude[]>(url).pipe(
       map((tipos) => tipos)
     );
   }
@@ -38,9 +36,9 @@ export class UnidadeSaudeService {
     });
   }
 
-  bucarUnidadePorId(id: number): Observable<UnidadeSaudeDao> {
+  bucarUnidadePorId(id: number): Observable<UnidadeSaude> {
     const url = `${environment.config.URL_API}/unidades/` ;
-    return this.httpCliente.get<UnidadeSaudeDao>(url + id).pipe(
+    return this.httpCliente.get<UnidadeSaude>(url + id).pipe(
       map((tipo) => tipo),
       catchError( (e) => this.errorHandler(e))
     );
