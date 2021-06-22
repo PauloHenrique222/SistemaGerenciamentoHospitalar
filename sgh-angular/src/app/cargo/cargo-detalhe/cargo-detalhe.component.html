@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-header text-center">
+    Manutenção de Cargo:
+  </div>
+  <div class="card-body">
+    <div class="card-container">
+      <div>
+        <form [formGroup]="formCargo" (ngSubmit)="onSubmit"  class="form-exemplo">
+
+          <div style="display: none">
+            <mat-form-field class="example-full-width">
+              <mat-label>USUARIO ID</mat-label>
+              <input matInput  formControlName="usuarioId">
+            </mat-form-field>
+          </div>
+
+          <div style="display: none">
+            <mat-form-field class="example-full-width">
+              <mat-label>ID</mat-label>
+              <input matInput  formControlName="id">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>NOME</mat-label>
+            <input type="text" matInput placeholder="Ex. João" formControlName="nome"
+                   [errorStateMatcher]="matcher"
+                   required>
+
+            <mat-error *ngIf="getControl.nome.hasError('nome') && !getControl.nome.hasError('required')">
+              por favor entre com nome válido!
+            </mat-error>
+          </mat-form-field>
+
+          <hr>
+
+          <button style="margin-right: 5px" mat-raised-button type="submit" (click)="onSubmit()" color="primary"> Salvar </button>
+          <button mat-raised-button type="button" (click)="voltar()" color="default"> Voltar </button>
+
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+

@@ -5,6 +5,7 @@ import {EMPTY, Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
 import {UnidadeSaude} from '../../model/unidade-saude';
+import {Tipo} from '../../model/tipo';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,10 @@ export class UnidadeSaudeService {
   ) { }
 
   listarUnidade(): Observable<UnidadeSaude[]> {
-    const url = `${environment.config.URL_API}/unidades` ;
-    return this.httpCliente.get<UnidadeSaude[]>(url).pipe(
-      map((tipos) => tipos)
+    const url = `${environment.config.URL_API}/unidades/listar/` ;
+    const id = +localStorage.getItem('usuario_id');
+    return this.httpCliente.get<UnidadeSaude[]>(url + id).pipe(
+      map((dados) => dados)
     );
   }
 
@@ -39,7 +41,31 @@ export class UnidadeSaudeService {
   bucarUnidadePorId(id: number): Observable<UnidadeSaude> {
     const url = `${environment.config.URL_API}/unidades/` ;
     return this.httpCliente.get<UnidadeSaude>(url + id).pipe(
-      map((tipo) => tipo),
+      map((dados) => dados),
+      catchError( (e) => this.errorHandler(e))
+    );
+  }
+
+  salvarUnidade(unidadeSaude: UnidadeSaude): Observable<UnidadeSaude> {
+    const url = `${environment.config.URL_API}/unidades/create` ;
+    return this.httpCliente.post<UnidadeSaude>(url, unidadeSaude).pipe(
+      map((dados) => dados),
+      catchError( (e) => this.errorHandler(e))
+    );
+  }
+
+  editarUnidade(unidadeSaude: UnidadeSaude): Observable<UnidadeSaude> {
+    const url = `${environment.config.URL_API}/unidades/edit` ;
+    return this.httpCliente.put<UnidadeSaude>(url, unidadeSaude).pipe(
+      map((dados) => dados),
+      catchError( (e) => this.errorHandler(e))
+    );
+  }
+
+  deletarUnidade(id: number): Observable<any> {
+    const url = `${environment.config.URL_API}/unidades/delete/`;
+    return this.httpCliente.delete<Tipo>(url + id).pipe(
+      map((obj) => obj),
       catchError( (e) => this.errorHandler(e))
     );
   }

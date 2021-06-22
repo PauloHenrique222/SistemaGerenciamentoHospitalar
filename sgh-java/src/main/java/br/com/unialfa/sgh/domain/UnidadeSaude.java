@@ -12,7 +12,9 @@ public class UnidadeSaude implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    private long usuarioId;
     private String nome;
+    private String telefone;
 
     @Column(unique = true, nullable = false)
     private String numeroRegistro;
@@ -27,17 +29,13 @@ public class UnidadeSaude implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "unidadeSaude")
-    private List<Telefone> telefones;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "unidadeSaude")
     private List<FichaAtendimento> fichaAtendimentos;
 
     @JsonIgnore
     @OneToMany(mappedBy = "unidadeSaude")
     private List<Funcionario> funcionarios;
 
-    @JsonIgnore
+
     @OneToOne(cascade=CascadeType.ALL)
     private Endereco endereco;
 
@@ -104,12 +102,12 @@ public class UnidadeSaude implements Serializable {
         this.exames = exames;
     }
 
-    public List<Telefone> getTelefones() {
-        return telefones;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public List<FichaAtendimento> getFichaAtendimentos() {
@@ -126,5 +124,13 @@ public class UnidadeSaude implements Serializable {
 
     public void setFuncionarios(List<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
+    }
+
+    public long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }

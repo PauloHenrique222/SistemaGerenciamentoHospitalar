@@ -12,16 +12,14 @@ public class FuncionarioBusiness {
 
 
     private final FuncionarioRepository funcionarioRepository;
-    private final EnderecoBusiness enderecoBusiness;
+    private final EnderecoRepository enderecoRepository;
     private final DepartamentoRepository departamentoRepository;
-    private final RegraRepository regraRepository;
     private final CargoRepository cargoRepository;
 
-    public FuncionarioBusiness(FuncionarioRepository funcionarioRepository, EnderecoBusiness enderecoBusiness, DepartamentoRepository departamentoRepository, RegraRepository regraRepository, CargoRepository cargoRepository) {
+    public FuncionarioBusiness(FuncionarioRepository funcionarioRepository, EnderecoRepository enderecoRepository, DepartamentoRepository departamentoRepository, CargoRepository cargoRepository) {
         this.funcionarioRepository = funcionarioRepository;
-        this.enderecoBusiness = enderecoBusiness;
+        this.enderecoRepository = enderecoRepository;
         this.departamentoRepository = departamentoRepository;
-        this.regraRepository = regraRepository;
         this.cargoRepository = cargoRepository;
     }
 
@@ -41,14 +39,11 @@ public class FuncionarioBusiness {
         Optional<Cargo> cargo =  cargoRepository.findById(funcionarioDAO.getCargo_id());
         funcionario.setCargo(cargo.get());
 
-        Optional<Regra> regra =  regraRepository.findById(funcionarioDAO.getRegra_id());
-        funcionario.setRegra(regra.get());
-
         Optional<Departamento> departamento =  departamentoRepository.findById(funcionarioDAO.getDepartamento_id());
         funcionario.setDepartamento(departamento.get());
 
         Endereco endereco;
-        endereco = enderecoBusiness.cadastrarEndereco(funcionarioDAO.getEnderecoDAO());
+        endereco = enderecoRepository.save(funcionarioDAO.getEndereco());
         funcionario.setEndereco(endereco);
 
         funcionarioRepository.save(funcionario);

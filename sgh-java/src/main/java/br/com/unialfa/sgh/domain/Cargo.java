@@ -1,5 +1,7 @@
 package br.com.unialfa.sgh.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +13,9 @@ public class Cargo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nome;
+    private long usuarioId;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cargo")
     private List<Funcionario> funcionarios;
 
@@ -40,5 +44,13 @@ public class Cargo implements Serializable {
 
     public void setFuncionarios(List<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
+    }
+
+    public long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }

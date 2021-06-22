@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {TipoService} from '../tipo.service';
-import {Tipo} from '../../../model/tipo';
+import {CargoService} from '../cargo.service';
+import {Cargo} from '../../../model/cargo';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -16,9 +16,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-tipo-detalhe',
-  templateUrl: './tipo-detalhe.component.html',
-  styleUrls: ['./tipo-detalhe.component.css'],
+  selector: 'app-cargo-detalhe',
+  templateUrl: './cargo-detalhe.component.html',
+  styleUrls: ['./cargo-detalhe.component.css'],
   providers: [
     // The locale would typically be provided on the root module of your application. We do it at
     // the component level here, due to limitations of our example generation script.
@@ -35,18 +35,18 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ],
 })
-export class TipoDetalheComponent implements OnInit, ErrorStateMatcher{
+export class CargoDetalheComponent implements OnInit, ErrorStateMatcher {
 
-  constructor(private tipoService: TipoService,
+  constructor(private cargoService: CargoService,
               private fb: FormBuilder,
               private router: Router,
               private route: ActivatedRoute,
   ) {
   }
 
-  tipo: Tipo;
+  cargo: Cargo;
 
-  formTipo: FormGroup;
+  formCargo: FormGroup;
 
   matcher = new MyErrorStateMatcher();
 
@@ -57,43 +57,43 @@ export class TipoDetalheComponent implements OnInit, ErrorStateMatcher{
       (params: Params) => {
         const id: number = +params.id;
         if (id) {
-          this.tipoService.bucarTipoPorId(id).subscribe(dados => {
-            this.tipo = dados;
-            this.formTipo = this.fb.group({
-              id: [this.tipo.id],
-              usuarioId: [this.tipo.usuarioId],
-              nome: [this.tipo.nome, [Validators.required, Validators.minLength(3)]],
+          this.cargoService.bucarCargoPorId(id).subscribe(dados => {
+            this.cargo = dados;
+            this.formCargo = this.fb.group({
+              id: [this.cargo.id],
+              usuarioId: [this.cargo.usuarioId],
+              nome: [this.cargo.nome, [Validators.required, Validators.minLength(3)]],
             });
           }, error => {console.error(error); });
         } else {
-          this.tipo = {
+          this.cargo = {
             id: null,
             usuarioId: +localStorage.getItem('usuario_id'),
             nome: '',
           };
-          this.formTipo = this.fb.group({
-            id: [this.tipo.id],
-            usuarioId: [this.tipo.usuarioId],
-            nome: [this.tipo.nome, Validators.required],
+          this.formCargo = this.fb.group({
+            id: [this.cargo.id],
+            usuarioId: [this.cargo.usuarioId],
+            nome: [this.cargo.nome, Validators.required],
           });
         }
       });
   }
 
   onSubmit(): void {
-    this.tipo = this.formTipo.value;
-    if (this.tipo.id === null){
-      this.tipoService.salvarTipo(this.tipo).subscribe(() => {
-        this.tipoService.showMessage('Tipo salvo com sucesso', false);
+    this.cargo = this.formCargo.value;
+    if (this.cargo.id === null){
+      this.cargoService.salvarCargo(this.cargo).subscribe(() => {
+        this.cargoService.showMessage('Departamento salvo com sucesso', false);
       });
-      this.router.navigate(['/listar-tipos']).then(() => {
+      this.router.navigate(['/listar-cargos']).then(() => {
         window.location.reload();
       });
     }else{
-      this.tipoService.editarTipo(this.tipo).subscribe(() => {
-        this.tipoService.showMessage('Atualizado com sucesso', false);
+      this.cargoService.editarCargo(this.cargo).subscribe(() => {
+        this.cargoService.showMessage('Atualizado com sucesso', false);
       });
-      this.router.navigate(['/listar-tipos']).then(() => {
+      this.router.navigate(['/listar-cargos']).then(() => {
         window.location.reload();
       });
     }
@@ -104,11 +104,11 @@ export class TipoDetalheComponent implements OnInit, ErrorStateMatcher{
   }
 
   get getControl(){
-    return this.formTipo.controls;
+    return this.formCargo.controls;
   }
 
   voltar(): void {
-    this.router.navigate(['/listar-tipos']);
+    this.router.navigate(['/listar-cargos']);
   }
 
 }

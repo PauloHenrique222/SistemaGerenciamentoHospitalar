@@ -21,32 +21,16 @@ public class Funcionario implements Serializable {
     private String email;
     private String senha;
     private boolean coordenador;
+    private String telefone;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="unidade_saude_id")
     private UnidadeSaude unidadeSaude;
 
-    @OneToMany(mappedBy = "funcionario")
-    private List<Solicitacao> solicitacaos;
-
-    @OneToMany(mappedBy = "funcionario")
-    private List<FichaAtendimento> fichaAtendimentos;
-
-    @OneToMany(mappedBy = "funcionario")
-    private List<HistoricoAtendimento> historicoAtendimentos;
-
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="departamento_id")
     private Departamento departamento;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name="regra_id")
-    private Regra regra;
-
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="cargo_id")
     private Cargo cargo;
@@ -54,8 +38,18 @@ public class Funcionario implements Serializable {
     @OneToOne(cascade=CascadeType.ALL)
     private Endereco endereco;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "funcionario")
-    private List<Telefone> telefones;
+    private List<Solicitacao> solicitacaos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "funcionario")
+    private List<FichaAtendimento> fichaAtendimentos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "funcionario")
+    private List<HistoricoAtendimento> historicoAtendimentos;
+
 
     public Funcionario() {
     }
@@ -172,14 +166,6 @@ public class Funcionario implements Serializable {
         this.departamento = departamento;
     }
 
-    public Regra getRegra() {
-        return regra;
-    }
-
-    public void setRegra(Regra regra) {
-        this.regra = regra;
-    }
-
     public Cargo getCargo() {
         return cargo;
     }
@@ -196,12 +182,12 @@ public class Funcionario implements Serializable {
         this.endereco = endereco;
     }
 
-    public List<Telefone> getTelefones() {
-        return telefones;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }
 

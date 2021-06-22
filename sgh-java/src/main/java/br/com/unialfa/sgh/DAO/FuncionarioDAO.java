@@ -1,5 +1,7 @@
 package br.com.unialfa.sgh.DAO;
 
+import br.com.unialfa.sgh.domain.Endereco;
+
 import java.math.BigDecimal;
 
 public class FuncionarioDAO {
@@ -16,7 +18,7 @@ public class FuncionarioDAO {
     private long cargo_id;
     private long regra_id;
     private long departamento_id;
-    private EnderecoDAO enderecoDAO;
+    private Endereco endereco;
 
     public String getNome() {
         return nome;
@@ -114,11 +116,11 @@ public class FuncionarioDAO {
         this.departamento_id = departamento_id;
     }
 
-    public EnderecoDAO getEnderecoDAO() {
-        return enderecoDAO;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setEnderecoDAO(EnderecoDAO enderecoDAO) {
-        this.enderecoDAO = enderecoDAO;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

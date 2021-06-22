@@ -7,7 +7,7 @@ import {UnidadeSaudeDetalheComponent} from './unidade-saude-detalhe/unidade-saud
 const unidadeSaudeRoutes: Routes = [
   {path: 'unidades', component: UnidadeSaudeListarComponent, canActivate: [AuthGuard]},
   {path: 'unidade-detalhe', component: UnidadeSaudeDetalheComponent, canActivate: [AuthGuard]},
-  {path: 'unidade-detalhe/id', component: UnidadeSaudeDetalheComponent, canActivate: [AuthGuard]},
+  {path: 'unidade-detalhe/:id', component: UnidadeSaudeDetalheComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

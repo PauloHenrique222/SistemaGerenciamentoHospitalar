@@ -1,7 +1,7 @@
 package br.com.unialfa.sgh.service;
 
-import br.com.unialfa.sgh.business.EnderecoBusiness;
 import br.com.unialfa.sgh.domain.Endereco;
+import br.com.unialfa.sgh.repository.EnderecoRepository;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/enderecos")
 public class EnderecoController {
 
-    final EnderecoBusiness enderecoBusiness;
+    final EnderecoRepository enderecoRepository;
 
-    public EnderecoController(EnderecoBusiness enderecoBusiness) {
-        this.enderecoBusiness = enderecoBusiness;
+    public EnderecoController(EnderecoRepository enderecoRepository) {
+        this.enderecoRepository = enderecoRepository;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Endereco> listarEnderecos(){
-        return enderecoBusiness.listarEnderecos();
+        return enderecoRepository.findAll();
     }
 
     @PutMapping(path = "/edit")
     public void editarEndereco(@RequestBody Endereco endereco){
-        enderecoBusiness.editarEndereco(endereco);
+        enderecoRepository.save(endereco);
     }
 }

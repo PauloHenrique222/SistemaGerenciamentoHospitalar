@@ -17,7 +17,7 @@ export class UnidadeSaudeListarComponent implements OnInit {
     private router: Router
   ) { }
 
-  displayedColumns: string[] = ['id', 'nome', 'numeroRegistro', 'tipo', 'acoes'];
+  displayedColumns: string[] = ['id', 'nome', 'numeroRegistro', 'tipo', 'telefone', 'acoes'];
 
   unidades: UnidadeSaude[];
 
@@ -31,11 +31,20 @@ export class UnidadeSaudeListarComponent implements OnInit {
   }
 
   editar(unidade: UnidadeSaude): void {
-    this.router.navigate(['/unidade-detalhe']);
+    this.router.navigate(['/unidade-detalhe', unidade.id]);
   }
 
   cadastrar(): void {
     this.router.navigate(['/unidade-detalhe']);
+  }
+
+  deletarUnidade(unidade: UnidadeSaude): void {
+    this.unidadeService.deletarUnidade(unidade.id).subscribe(dados => {
+      this.router.navigate(['/unidades'])
+        .then(() => {
+          window.location.reload();
+        });
+    });
   }
 
 }

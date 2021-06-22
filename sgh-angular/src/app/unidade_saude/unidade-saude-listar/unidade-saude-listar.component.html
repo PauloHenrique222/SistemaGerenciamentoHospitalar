@@ -28,6 +28,12 @@
     </ng-container>
 
     <!-- numeroRegistro Column -->
+    <ng-container matColumnDef="telefone">
+      <th mat-header-cell *matHeaderCellDef  class="text-bold"> TELEFONE </th>
+      <td mat-cell *matCellDef="let unidade"> {{unidade.telefone}} </td>
+    </ng-container>
+
+    <!-- numeroRegistro Column -->
     <ng-container matColumnDef="tipo">
       <th mat-header-cell *matHeaderCellDef  class="text-bold"> TIPO </th>
       <td mat-cell *matCellDef="let unidade"> {{unidade.tipo.nome}} </td>
@@ -39,6 +45,7 @@
       <td mat-cell *matCellDef="let unidade">
         <div>
           <button mat-raised-button color="primary" style="margin-right: 5px" (click)="editar(unidade)">Editar</button>
+          <button mat-raised-button color="warn" (click)="deletarUnidade(unidade)">Excluir</button>
         </div>
       </td>
     </ng-container>

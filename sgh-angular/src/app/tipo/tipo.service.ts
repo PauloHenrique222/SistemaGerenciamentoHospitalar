@@ -45,6 +45,11 @@ export class TipoService {
     return EMPTY;
   }
 
+  errorHandlerDeleteTipo(e: any): Observable<any>{
+    this.showMessage('Ocorreu um erro! Tipo não pode ser excluído se tiver sendo usando no cadastro de Unidade de Saúde', true );
+    return EMPTY;
+  }
+
   showMessage(msg: string, isError: boolean = false): void{
     this.snackbar.open(msg, 'X', {
       duration: 3000,
@@ -66,7 +71,7 @@ export class TipoService {
     const url = `${environment.config.URL_API}/tipos/delete/`;
     return this.httpCliente.delete<Tipo>(url + id).pipe(
       map((obj) => obj),
-      catchError( (e) => this.errorHandler(e))
+      catchError( (e) => this.errorHandlerDeleteTipo(e))
     );
   }
 

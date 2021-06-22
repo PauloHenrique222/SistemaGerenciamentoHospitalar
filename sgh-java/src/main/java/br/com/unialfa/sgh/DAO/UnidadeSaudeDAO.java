@@ -1,11 +1,16 @@
 package br.com.unialfa.sgh.DAO;
 
+import br.com.unialfa.sgh.domain.Endereco;
+import br.com.unialfa.sgh.domain.Tipo;
+
 public class UnidadeSaudeDAO {
     private long id;
+    private long usuarioId;
     private String nome;
-    private long tipo_id;
+    private String telefone;
+    private Tipo tipo;
     private String numeroRegistro;
-    private EnderecoDAO enderecoDAO;
+    private Endereco endereco;
 
     public long getId() {
         return id;
@@ -23,12 +28,20 @@ public class UnidadeSaudeDAO {
         this.nome = nome;
     }
 
-    public long getTipo_id() {
-        return tipo_id;
+    public Tipo getTipo() {
+        return tipo;
     }
 
-    public void setTipo_id(long tipo_id) {
-        this.tipo_id = tipo_id;
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getNumeroRegistro() {
@@ -39,11 +52,19 @@ public class UnidadeSaudeDAO {
         this.numeroRegistro = numeroRegistro;
     }
 
-    public EnderecoDAO getEnderecoDAO() {
-        return enderecoDAO;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setEnderecoDAO(EnderecoDAO enderecoDAO) {
-        this.enderecoDAO = enderecoDAO;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }

@@ -19,9 +19,6 @@ public class Paciente implements Serializable {
     @OneToMany(mappedBy = "paciente")
     private List<FichaAtendimento> fichaAtendimentos;
 
-    @OneToMany(mappedBy = "paciente")
-    private List<Telefone> telefones;
-
     @OneToOne(cascade=CascadeType.ALL)
     private Endereco endereco;
 
@@ -66,14 +63,6 @@ public class Paciente implements Serializable {
 
     public void setFichaAtendimentos(List<FichaAtendimento> fichaAtendimentos) {
         this.fichaAtendimentos = fichaAtendimentos;
-    }
-
-    public List<Telefone> getTelefones() {
-        return telefones;
-    }
-
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
     }
 
     public Endereco getEndereco() {

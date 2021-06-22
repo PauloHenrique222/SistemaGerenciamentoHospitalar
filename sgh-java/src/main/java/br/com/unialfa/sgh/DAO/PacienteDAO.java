@@ -1,11 +1,13 @@
 package br.com.unialfa.sgh.DAO;
 
+import br.com.unialfa.sgh.domain.Endereco;
+
 public class PacienteDAO {
 
     private String nome;
     private String cpf;
     private String rg;
-    private EnderecoDAO enderecoDAO;
+    private Endereco endereco;
 
     public String getNome() {
         return nome;
@@ -31,11 +33,11 @@ public class PacienteDAO {
         this.rg = rg;
     }
 
-    public EnderecoDAO getEnderecoDAO() {
-        return enderecoDAO;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setEnderecoDAO(EnderecoDAO enderecoDAO) {
-        this.enderecoDAO = enderecoDAO;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

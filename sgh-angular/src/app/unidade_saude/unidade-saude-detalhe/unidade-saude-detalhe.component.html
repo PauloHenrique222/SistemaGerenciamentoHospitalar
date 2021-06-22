@@ -1,3 +1,6 @@
+<div class="text-center alert-warning" style="margin-bottom: 20px">
+  Para cadastrar uma Unidade de Saúde lembre-se de cadastrar um Tipo
+</div>
 <div class="card">
   <div class="card-header text-center">
     Manutenção de Unidades de Saúde:
@@ -6,10 +9,18 @@
     <div class="card-container">
       <div>
         <form [formGroup]="formUnidade" (ngSubmit)="onSubmit"  class="form-exemplo">
+
           <div style="display: none">
             <mat-form-field class="example-full-width">
               <mat-label>ID</mat-label>
               <input matInput  formControlName="id">
+            </mat-form-field>
+          </div>
+
+          <div style="display: none">
+            <mat-form-field class="example-full-width">
+              <mat-label>USUARIO ID</mat-label>
+              <input matInput  formControlName="usuarioId">
             </mat-form-field>
           </div>
 
@@ -34,13 +45,39 @@
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
+            <mat-label>TELEFONE</mat-label>
+            <input type="text" matInput placeholder="Ex. (62) 99999-8888" formControlName="telefone"
+                   [errorStateMatcher]="matcher"
+                   required>
+            <mat-error *ngIf="getControl.telefone.hasError('telefone') && !getControl.telefone.hasError('required')">
+              por favor entre com um telefone válido!
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>TIPO</mat-label>
+            <mat-select formControlName="tipoId">
+              <mat-option *ngFor="let option of tipos" [value]="option.id">{{ option.nome }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
             <mat-label>RUA</mat-label>
             <input type="text" matInput placeholder="Ex. Rua SB" formControlName="rua"
                    [errorStateMatcher]="matcher"
                    required>
-
             <mat-error *ngIf="getControl.rua.hasError('rua') && !getControl.rua.hasError('required')">
               por favor entre com um nome de rua válido!
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>NÚMERO</mat-label>
+            <input type="number" matInput placeholder="Ex. Número 01" formControlName="numero"
+                   [errorStateMatcher]="matcher"
+                   required>
+            <mat-error *ngIf="getControl.numero.hasError('numero') && !getControl.numero.hasError('required')">
+              por favor entre com um número válido!
             </mat-error>
           </mat-form-field>
 
@@ -49,7 +86,6 @@
             <input type="text" matInput placeholder="Ex. Campinas" formControlName="setor"
                    [errorStateMatcher]="matcher"
                    required>
-
             <mat-error *ngIf="getControl.setor.hasError('setor') && !getControl.setor.hasError('required')">
               por favor entre com um nome de setor válido!
             </mat-error>
@@ -69,7 +105,6 @@
             <input type="text" matInput placeholder="Ex. Próxmo ao Supermecado LD" formControlName="complemento"
                    [errorStateMatcher]="matcher"
                    required>
-
             <mat-error *ngIf="getControl.complemento.hasError('complemento') && !getControl.complemento.hasError('required')">
               por favor entre com um complemento válido!
             </mat-error>
@@ -80,7 +115,6 @@
             <input type="text" matInput placeholder="Ex. Brasil" formControlName="pais"
                    [errorStateMatcher]="matcher"
                    required>
-
             <mat-error *ngIf="getControl.pais.hasError('pais') && !getControl.pais.hasError('required')">
               por favor entre com um nome de Pais válido!
             </mat-error>
@@ -91,7 +125,6 @@
             <input type="text" matInput placeholder="Ex. Goías" formControlName="estado"
                    [errorStateMatcher]="matcher"
                    required>
-
             <mat-error *ngIf="getControl.estado.hasError('estado') && !getControl.estado.hasError('required')">
               por favor entre com um nome de Estado válido!
             </mat-error>
@@ -102,7 +135,6 @@
             <input type="text" matInput placeholder="Ex. Goiânia" formControlName="cidade"
                    [errorStateMatcher]="matcher"
                    required>
-
             <mat-error *ngIf="getControl.cidade.hasError('cidade') && !getControl.cidade.hasError('required')">
               por favor entre com um nome de Cidade válido!
             </mat-error>

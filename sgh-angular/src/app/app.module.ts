@@ -10,18 +10,18 @@ import {IConfig, NgxMaskModule} from 'ngx-mask';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {LoginModule} from './login/login.module';
-import { HomeComponent } from './home/home/home.component';
 import {TipoModule} from './tipo/tipo.module';
-import { UnidadeSaudeListarComponent } from './unidade_saude/unidade-saude-listar/unidade-saude-listar.component';
 import {UnidadeSaudeModule} from './unidade_saude/unidade-saude.module';
 import {CadastroModule} from './cadastro/cadastro.module';
+import {HomeModule} from './home/home.module';
+import {DepartamentoModule} from './departamento/departamento.module';
+import {CargoModule} from './cargo/cargo.module';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +35,10 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     LoginModule,
     TipoModule,
     UnidadeSaudeModule,
-    CadastroModule
+    CadastroModule,
+    HomeModule,
+    DepartamentoModule,
+    CargoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
